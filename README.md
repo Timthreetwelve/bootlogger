@@ -1,6 +1,6 @@
 <p align="center">
   <a target="_blank" rel="noopener noreferrer">
-    <img width="128" src="https://github.com/Timthreetwelve/bootlogger/blob/main/winres/BL256.png" alt="bootlogger Logo">
+    <img width="128" src="winres/bl128.png" alt="bootlogger Logo">
   </a>
 </p>
 <h1 align="center">
