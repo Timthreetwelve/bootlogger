@@ -68,8 +68,8 @@ bootlogger configuration:
   quiet           = false
   timeformat      = RFC822
 
-bootlogger.exe autostart status
-'bootlogger' is present in 'HKCU\Software\Microsoft\Windows\CurrentVersion\Run' and will run from: C:\PortableApps\bootlogger.exe when Windows starts.
+bootlogger.exe autostart --enable
+bootlogger was added to 'HKCU\Software\Microsoft\Windows\CurrentVersion\Run' and will run from: C:\PortableApps\bootlogger.exe when Windows starts.
 
 bootlogger.exe version
 bootlogger version: 0.1.0
@@ -166,4 +166,3 @@ The following packages were used in the development of bootlogger:
 - color - https://github.com/fatih/color
 - pflag - https://github.com/spf13/pflag
 - viper - https://github.com/spf13/viper
-- sys   - https://golang.org/x/sys
