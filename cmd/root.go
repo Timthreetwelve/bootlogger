@@ -22,6 +22,7 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -63,7 +64,8 @@ See https://github.com/Timthreetwelve/bootlogger for more information and docume
 	Run: func(cmd *cobra.Command, args []string) {
 		err := utils.WriteLog()
 		if err != nil {
-			log.Printf("bootlogger error: %v", err)
+			fmt.Printf("bootlogger error: %v", err)
+			log.Printf("bootlogger ended with an error: %v", err)
 			log.Println("")
 			os.Exit(1)
 		}
@@ -81,7 +83,8 @@ See https://github.com/Timthreetwelve/bootlogger for more information and docume
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
-		log.Printf("bootlogger error: %v", err)
+		fmt.Printf("bootlogger error: %v", err)
+		log.Printf("bootlogger ended with an error: %v", err)
 		log.Println("")
 		os.Exit(1)
 	}
