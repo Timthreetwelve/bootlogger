@@ -9,7 +9,7 @@
 
 <div align="center">
 
-![GitHub License](https://img.shields.io/github/license/timthreetwelve/bootlogger?color=orange)
+![GitHub License](https://img.shields.io/badge/license-MIT-green?style=plastic)
 ![Static Badge](https://img.shields.io/badge/Built%20for-Windows-2196F3?style=plastic)
 [![GitHub last commit](https://img.shields.io/github/last-commit/timthreetwelve/bootlogger?style=plastic)](https://github.com/Timthreetwelve/bootlogger/commits/main)
 
