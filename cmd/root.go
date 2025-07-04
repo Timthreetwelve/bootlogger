@@ -217,22 +217,16 @@ func initConfig() {
 func InitLogging() {
 	appLogFile, err := utils.GetAppLogFile()
 	if err != nil {
-		log.Fatalf("bootLogger: error creating application log file: %v", err)
+		fmt.Printf("bootLogger: error creating application log file: %v\n", err)
+		os.Exit(1)
 	}
 	file, _ := os.OpenFile(appLogFile.Name(), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	log.SetOutput(file)
 
 	execPath, err := utils.GetExecutablePath()
 	if err != nil {
-		log.Fatalf("bootLogger error: %v", err)
+		fmt.Printf("bootLogger error: %v\n", err)
+		log.Printf("bootLogger error: %v\n", err)
 	}
 	log.Printf("bootlogger version %s is starting from %s.", Ver, execPath)
-}
-
-// CheckFullyQualifiedPath ensures that the path id absolute aka fully qualified
-func CheckFullyQualifiedPath(file string) bool {
-	if filepath.IsAbs(file) {
-		return true
-	}
-	return false
 }
