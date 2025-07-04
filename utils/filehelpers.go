@@ -65,3 +65,11 @@ func GetAppLogFile() (*os.File, error) {
 	defer appLogFile.Close()
 	return appLogFile, nil
 }
+
+// CheckFullyQualifiedPath ensures that the path id absolute aka fully qualified
+func CheckFullyQualifiedPath(file string) bool {
+	if filepath.IsAbs(file) {
+		return true
+	}
+	return false
+}
