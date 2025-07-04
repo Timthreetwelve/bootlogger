@@ -164,11 +164,19 @@ func init() {
 
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
-	// path to config file
-	configPath := filepath.Join(utils.GetExecutableFolder(), configFileName)
+	// first get the folder where the executable is found
+	execFolder, err := utils.GetExecutableFolder()
+	if err != nil {
+		fmt.Printf("bootlogger error getting executable folder: %v", err)
+		log.Printf("bootlogger error getting executable folder: %v", err)
+		log.Println("bootlogger is unable to continue.")
+		log.Println("")
+		os.Exit(1)
+	}
 
 	// Set the file name and path of the configuration file
 	// A config file is not required, but if it exists, it will be used
+	configPath := filepath.Join(execFolder, configFileName)
 	viper.SetConfigFile(configPath)
 
 	// Set default values for the configuration
