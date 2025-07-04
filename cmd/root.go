@@ -38,7 +38,7 @@ import (
 const (
 	configFileName     = "config.yaml"
 	defaultDryRun      = false
-	defaultFileName    = "./bootlog.txt"
+	defaultFileName    = "bootlog.txt"
 	defaultNameWidth   = 14
 	defaultNoBuildInfo = false
 	defaultNoText      = false
@@ -172,8 +172,7 @@ func initConfig() {
 	viper.SetConfigFile(configPath)
 
 	// Set default values for the configuration
-	defFileName := filepath.Join(utils.GetExecutableFolder(), defaultFileName)
-	viper.SetDefault("logfile", defFileName)
+	viper.SetDefault("logfile", filepath.Join(execFolder, defaultFileName))
 	viper.SetDefault("namewidth", defaultNameWidth)
 	viper.SetDefault("no-buildinfo", defaultNoBuildInfo)
 	viper.SetDefault("no-text", defaultNoText)
@@ -197,6 +196,13 @@ func initConfig() {
 			return
 		}
 	}
+
+	logFile := viper.GetString("logfile")
+	if !CheckFullyQualifiedPath(logFile) {
+		fmt.Printf("Please use a fully qualified (absolute) path for the log file. '%s' is not fully qualified.\n", logFile)
+		log.Printf("bootlogger log file name is not absolute. %s", logFile)
+		os.Exit(1)
+	}
 }
 
 // Initialize logging and write version and location to the log
@@ -213,4 +219,12 @@ func InitLogging() {
 		log.Fatalf("bootLogger error: %v", err)
 	}
 	log.Printf("bootlogger version %s is starting from %s.", Ver, execPath)
+}
+
+// CheckFullyQualifiedPath ensures that the path id absolute aka fully qualified
+func CheckFullyQualifiedPath(file string) bool {
+	if filepath.IsAbs(file) {
+		return true
+	}
+	return false
 }
