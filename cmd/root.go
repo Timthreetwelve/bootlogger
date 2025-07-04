@@ -206,7 +206,7 @@ func initConfig() {
 	}
 
 	logFile := viper.GetString("logfile")
-	if !CheckFullyQualifiedPath(logFile) {
+	if !utils.CheckFullyQualifiedPath(logFile) {
 		fmt.Printf("Please use a fully qualified (absolute) path for the log file. '%s' is not fully qualified.\n", logFile)
 		log.Printf("bootlogger log file name is not absolute. %s", logFile)
 		os.Exit(1)
