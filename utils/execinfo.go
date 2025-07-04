@@ -42,12 +42,12 @@ func GetExecutablePath() (string, error) {
 }
 
 // GetExecutableFolder returns the directory of the currently running executable
-func GetExecutableFolder() string {
+func GetExecutableFolder() (string, error) {
 	exec, err := GetExecutablePath()
 	if err != nil {
-		return ""
+		return "", err
 	}
-	return filepath.Dir(exec)
+	return filepath.Dir(exec), nil
 }
 
 // GetAppLogFile creates a file used for application logging
