@@ -96,7 +96,8 @@ func Execute() {
 // It is automatically executed when a package is initialized, before
 // the execution of the main function or any other code in the package.
 func init() {
-	// Initialize application logging
+	// Initialize application logging before anything else so that
+	// any subsequent errors can be logged.
 	InitLogging()
 
 	// Start cobra and viper configuration
