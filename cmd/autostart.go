@@ -45,14 +45,6 @@ HKCU\Software\Microsoft\Windows\CurrentVersion\Run, allowing it to run automatic
 		disable, _ := cmd.Flags().GetBool("disable")
 		//Don't need to check status flag since it is the default action
 
-		totalFlags := cmd.Flags().NFlag()
-		if totalFlags > 1 {
-			color.New(color.FgHiRed).Println("You cannot specify multiple flags at the same time. Please use only one of --enable, --disable, or --status.")
-			color.New(color.FgHiWhite).Println("Use 'bootlogger.exe help autostart' for more help.")
-			log.Println("bootlogger autostart: Too many flags used")
-			return
-		}
-
 		switch {
 		case enable:
 			msg, err := utils.EnableAutostart()
@@ -93,4 +85,5 @@ func init() {
 	autostartCmd.Flags().BoolP("enable", "e", false, "Enable bootlogger to run at startup")
 	autostartCmd.Flags().BoolP("disable", "d", false, "Disable bootlogger from running at startup")
 	autostartCmd.Flags().BoolP("status", "s", false, "check autostart status")
+	autostartCmd.MarkFlagsMutuallyExclusive("enable", "disable", "status")
 }
