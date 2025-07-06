@@ -56,6 +56,9 @@ func formatLogLine() string {
 func WriteLog() error {
 	// Get the log file path from the configuration
 	logFile := viper.GetString("logFile")
+	if !CheckFullyQualifiedPath(logFile) {
+		return fmt.Errorf("Please use a fully qualified (absolute) path for the log file. '%s' is not fully qualified.", logFile)
+	}
 
 	// Get the formatted log line
 	logLine := formatLogLine()
