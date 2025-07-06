@@ -32,6 +32,7 @@ var printlogCmd = &cobra.Command{
 	Use:     "printlog",
 	Short:   "Prints the bootlogger log file to the console. Output can be piped through 'more' for easier reading.",
 	Aliases: []string{"print-log", "pl"},
+	Args:    cobra.NoArgs,
 	Example: "  bootlogger printlog\n  bootlogger pl | more",
 	Run: func(cmd *cobra.Command, args []string) {
 		err := utils.PrintLog()

@@ -30,6 +30,7 @@ import (
 var versionCmd = &cobra.Command{
 	Use:     "version",
 	Aliases: []string{"ver", "v"},
+	Args:    cobra.NoArgs,
 	Short:   "Print the bootlogger version number to the console.",
 	Example: "  bootlogger version\n  bootlogger ver",
 	Run: func(cmd *cobra.Command, args []string) {

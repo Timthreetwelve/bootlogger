@@ -33,6 +33,7 @@ import (
 var autostartCmd = &cobra.Command{
 	Use:     "autostart",
 	Aliases: []string{"auto", "start"},
+	Args:    cobra.NoArgs,
 	Example: "  bootlogger autostart --enable\n  bootlogger auto --disable\n  bootlogger autostart -s",
 	Short:   "Check status or manage the execution of bootlogger at Windows startup.",
 	Long: `The autostart command allow you to enable or disable bootlogger from running at Windows startup,

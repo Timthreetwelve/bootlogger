@@ -30,6 +30,7 @@ import (
 var printConfigCmd = &cobra.Command{
 	Use:     "printconfig",
 	Aliases: []string{"print-config", "pconfig", "pc"},
+	Args:    cobra.NoArgs,
 	Example: "  bootlogger printconfig\n  bootlogger pc",
 	Short:   "Print the current configuration settings to the console.",
 	Run: func(cmd *cobra.Command, args []string) {
