@@ -111,45 +111,45 @@ func init() {
 	cobra.OnInitialize(initConfig)
 
 	// Add a persistent flag for the timeformat option
-	rootCmd.LocalFlags().StringP("timeformat", "t", defaultTimeFormat,
+	rootCmd.Flags().StringP("timeformat", "t", defaultTimeFormat,
 		"Time format, 12 or 24 hour, or most pre-defined Go time formats\nSee https://pkg.go.dev/time#pkg-constants for details")
-	if err := viper.BindPFlag("timeformat", rootCmd.PersistentFlags().Lookup("timeformat")); err != nil {
+	if err := viper.BindPFlag("timeformat", rootCmd.Flags().Lookup("timeformat")); err != nil {
 		log.Printf("Error binding flag 'timeformat': %v", err)
 	}
 
 	// Add a persistent flag for the no-buildinfo option
-	rootCmd.LocalFlags().Bool("no-buildinfo", defaultNoBuildInfo, "Do not include version and build information in the log")
-	if err := viper.BindPFlag("no-buildinfo", rootCmd.PersistentFlags().Lookup("no-buildinfo")); err != nil {
+	rootCmd.Flags().Bool("no-buildinfo", defaultNoBuildInfo, "Do not include version and build information in the log")
+	if err := viper.BindPFlag("no-buildinfo", rootCmd.Flags().Lookup("no-buildinfo")); err != nil {
 		log.Printf("Error binding flag 'no-buildinfo': %v", err)
 	}
 
 	// Add a persistent flag for the no-text option
-	rootCmd.LocalFlags().Bool("no-text", defaultNoBuildInfo, "Do not include the 'was rebooted on' text in the log")
-	if err := viper.BindPFlag("no-text", rootCmd.PersistentFlags().Lookup("no-text")); err != nil {
+	rootCmd.Flags().Bool("no-text", defaultNoBuildInfo, "Do not include the 'was rebooted on' text in the log")
+	if err := viper.BindPFlag("no-text", rootCmd.Flags().Lookup("no-text")); err != nil {
 		log.Printf("Error binding flag 'no-text': %v", err)
 	}
 
 	// Add a persistent flag for the logFile option
-	rootCmd.LocalFlags().StringP("logfile", "l", defaultFileName, "Path to the log file, including the file name and extension")
-	if err := viper.BindPFlag("logfile", rootCmd.PersistentFlags().Lookup("logfile")); err != nil {
+	rootCmd.Flags().StringP("logfile", "l", defaultFileName, "Path to the log file, including the file name and extension")
+	if err := viper.BindPFlag("logfile", rootCmd.Flags().Lookup("logfile")); err != nil {
 		log.Printf("Error binding flag 'logfile': %v", err)
 	}
 
 	// Add a persistent flag for the nameField option
-	rootCmd.LocalFlags().IntP("namewidth", "w", defaultNameWidth, "Minimum width of the computer name field in the log")
-	if err := viper.BindPFlag("namewidth", rootCmd.PersistentFlags().Lookup("namewidth")); err != nil {
+	rootCmd.Flags().IntP("namewidth", "w", defaultNameWidth, "Minimum width of the computer name field in the log")
+	if err := viper.BindPFlag("namewidth", rootCmd.Flags().Lookup("namewidth")); err != nil {
 		log.Printf("Error binding flag 'namewidth': %v", err)
 	}
 
-	// Add a persistent flag for the quiet option
-	rootCmd.LocalFlags().BoolP("quiet", "q", defaultQuiet, "Do not print non-error messages to the console")
-	if err := viper.BindPFlag("quiet", rootCmd.PersistentFlags().Lookup("quiet")); err != nil {
+	// Add a local flag for the quiet option
+	rootCmd.Flags().BoolP("quiet", "q", defaultQuiet, "Do not print non-error messages to the console")
+	if err := viper.BindPFlag("quiet", rootCmd.Flags().Lookup("quiet")); err != nil {
 		log.Printf("Error binding flag 'quiet': %v", err)
 	}
 
-	// Add a persistent flag for the quiet option
-	rootCmd.LocalFlags().Bool("dryrun", defaultQuiet, "Print log entry to the console but do not write to the log file")
-	if err := viper.BindPFlag("dryrun", rootCmd.PersistentFlags().Lookup("dryrun")); err != nil {
+	// Add a local flag for the quiet option
+	rootCmd.Flags().Bool("dryrun", defaultQuiet, "Print log entry to the console but do not write to the log file")
+	if err := viper.BindPFlag("dryrun", rootCmd.Flags().Lookup("dryrun")); err != nil {
 		log.Printf("Error binding flag 'dryrun': %v", err)
 	}
 
