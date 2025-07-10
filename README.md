@@ -85,7 +85,7 @@ Configurable options are:
 |`dryrun`|Boolean|`false`|Write log line to console but _**not**_ to the log file. Useful for testing.|
 |`logfile`|String|`bootlog.txt`|Log file filename with fully qualified ([absolute](https://www.computerhope.com/issues/ch001708.htm)) path. Use quotes if there are spaces in the path.|
 |`namewidth`|Integer|`14`|Minimum computer name width. Longer names are _**not**_ truncated. Shorter names are padded with spaces.|
-|`no-buildinfo`|Boolean|`false`|Version and build info will_**not**_ be included in the log entry.|
+|`no-buildinfo`|Boolean|`false`|Version and build info will _**not**_ be included in the log entry.|
 |`no-text`|Boolean|`false`|The "was rebooted on" text will _**not**_ be included in the log entry.|
 |`quiet`|Boolean|`false`|Quiet operation. Do _**not**_ print non-error messages to the console.|
 |`timeformat`|String|`12Hour`|Date/Time format. Use `12Hour` for 12 hour, `24Hour` for 24 hour or most of the Go pre-defined formats. _DateOnly and TimeOnly are _**not**_ included_. See https://pkg.go.dev/time#pkg-constants for details. |
