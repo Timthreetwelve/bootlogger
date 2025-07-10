@@ -112,7 +112,7 @@ func init() {
 
 	// Add a persistent flag for the timeformat option
 	rootCmd.Flags().StringP("timeformat", "t", defaultTimeFormat,
-		"Time format, 12 or 24 hour, or most pre-defined Go time formats\nSee https://pkg.go.dev/time#pkg-constants for details")
+		"Time format - See the README file for possible values")
 	if err := viper.BindPFlag("timeformat", rootCmd.Flags().Lookup("timeformat")); err != nil {
 		log.Printf("Error binding flag 'timeformat': %v", err)
 	}
@@ -130,7 +130,7 @@ func init() {
 	}
 
 	// Add a persistent flag for the logFile option
-	rootCmd.Flags().StringP("logfile", "l", defaultFileName, "Path to the log file, including the file name and extension")
+	rootCmd.Flags().StringP("logfile", "l", "", "Absolute path to the log file (default is 'bootlog.txt' in the same folder as bootlog.exe)")
 	if err := viper.BindPFlag("logfile", rootCmd.Flags().Lookup("logfile")); err != nil {
 		log.Printf("Error binding flag 'logfile': %v", err)
 	}
