@@ -10,7 +10,10 @@
 <div align="center">
 
 ![GitHub License](https://img.shields.io/badge/license-MIT-green?style=plastic)
-![Static Badge](https://img.shields.io/badge/Built%20for-Windows-2196F3?style=plastic)
+![Static Badge](https://img.shields.io/badge/built%20for-Windows-2196F3?style=plastic)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Timthreetwelve/bootlogger?style=plastic)](https://github.com/Timthreetwelve/bootlogger/releases/latest)
+[![GitHub Release Date](https://img.shields.io/github/release-date/timthreetwelve/bootlogger?style=plastic&color=orange)](https://github.com/Timthreetwelve/bootlogger/releases/latest)
+[![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/timthreetwelve/bootlogger/latest?style=plastic)](https://github.com/Timthreetwelve/bootlogger/commits/main)
 [![GitHub last commit](https://img.shields.io/github/last-commit/timthreetwelve/bootlogger?style=plastic)](https://github.com/Timthreetwelve/bootlogger/commits/main)
 
 </div>
