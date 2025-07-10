@@ -18,8 +18,8 @@
 ## bootlogger
 bootlogger is a command-line tool for Windows that logs system restart events, commonly known as a [reboot](https://en.wikipedia.org/wiki/Reboot). It records the date and time of each reboot, along with the computer name, and optionally the Windows version and build info. The log file name and location can be specified and the boot time can be formatted in any of more than a dozen date/time formats. bootlogger can also add itself to the Windows registry to run automatically at startup, ensuring that all reboots are logged. BTW, the name is "bootlogger", all lowercase.
 
-## Why bootlogger?
-Perhaps you've seen my [Windows Update Viewer](https://github.com/Timthreetwelve/WUView) app or maybe [Get My IP](https://github.com/Timthreetwelve/GetMyIP) or one of the others. I needed to take a short break from maintaining those and felt like trying something new. I'd read good things about the [Go language](https://go.dev) and decided to give it a go _(pun intended)_. I was using a PowerShell script to log reboots, so I decided that rewriting it in Go would be a good project. The result is what you see here. I found it easy to get started with Go. Easier than writing this README file!
+## Why bootlogger and Why Go?
+Perhaps you've seen my [Windows Update Viewer](https://github.com/Timthreetwelve/WUView) app or maybe [Get My IP](https://github.com/Timthreetwelve/GetMyIP) or one of the others. I needed to take a short break from maintaining those and felt like trying something new. I'd read good things about the [Go language](https://go.dev) and decided to give it a go _(pun intended)_. I was using a PowerShell script to log reboots, so I decided that rewriting it in Go would be a good first project. The result is what you see here. I found it easy to get started with Go. The [Cobra](https://github.com/spf13/cobra) and [Viper](https://github.com/spf13/cobra) packages made things a lot easier
 
 ## What it logs
 #### Computer name
@@ -38,7 +38,7 @@ The build number comes from combining the `CurrentBuildNumber` value with the `U
 The computer name, reboot date and time, and the Windows version and build are written as a single record to the log file. As noted above, the logging of the version and build info is optional. That is controlled by the `no-buildinfo` option discussed below.
 
 ## Usage
-Running bootlogger without any additional commands or flags will write a record to the log file using the default configuration or the updated configuration found in environment variables, a configuration file, and/or command-line flags.
+Running bootlogger without any additional commands or flags will write a record to the log file using the default configuration or the updated configuration found in environment variables, a configuration file, and/or command-line flags. _Continue reading for examples_.
 
 ## Commands
 Before discussing configuration, a few words about commands. Commands can be differentiated from flags by the fact that they don't begin with the dash, or two dashes, that flags use.
@@ -58,10 +58,10 @@ or check its current status. When enabled, bootlogger will be added to the Windo
 Use `bootlogger.exe [command] --help` for more information about any of these commands.
 
 #### Example command output:
-```powershell
-bootlog.exe printconfig
+```cmd
+bootlogger.exe printconfig
 bootlogger configuration:
-  logfile         = ./bootlogger.test.log
+  logfile         = D:\Logs\bootlogger.test.log
   namewidth       = 12
   no-buildinfo    = true
   no-text         = false
@@ -82,13 +82,13 @@ Configurable options are:
 
 |Option|Type|Default value|Description|
 |------|----|-------------|-----------|
-|`dryrun`|Boolean|`false`|Write log line to console but not to the log file.|
-|`logfile`|String|`./bootlog.txt`|Log file filename with path. Use quotes if there are spaces in the path.|
-|`namewidth`|Integer|`14`|Minimum computer name width. Longer names are not truncated. Shorter names are padded with spaces.|
-|`no-buildinfo`|Boolean|`false`|Version and build info will not be included in the log entry.|
-|`no-text`|Boolean|`false`|The descriptive text "was rebooted on" will not be included in the log entry.|
-|`quiet`|Boolean|`false`|Quiet operation. Do not print non-error messages to the console.|
-|`timeformat`|String|`12Hour`|Date/Time format. Use `12Hour` for 12 hour, `24Hour` for 24 hour or most of the Go pre-defined formats. _DateOnly and TimeOnly are not included_. See https://pkg.go.dev/time#pkg-constants for details. |
+|`dryrun`|Boolean|`false`|Write log line to console but _**not**_ to the log file. Useful for testing.|
+|`logfile`|String|`bootlog.txt`|Log file filename with fully qualified ([absolute](https://www.computerhope.com/issues/ch001708.htm)) path. Use quotes if there are spaces in the path.|
+|`namewidth`|Integer|`14`|Minimum computer name width. Longer names are _**not**_ truncated. Shorter names are padded with spaces.|
+|`no-buildinfo`|Boolean|`false`|Version and build info will_**not**_ be included in the log entry.|
+|`no-text`|Boolean|`false`|The "was rebooted on" text will _**not**_ be included in the log entry.|
+|`quiet`|Boolean|`false`|Quiet operation. Do _**not**_ print non-error messages to the console.|
+|`timeformat`|String|`12Hour`|Date/Time format. Use `12Hour` for 12 hour, `24Hour` for 24 hour or most of the Go pre-defined formats. _DateOnly and TimeOnly are _**not**_ included_. See https://pkg.go.dev/time#pkg-constants for details. |
 
 
 ### Configuration file
@@ -97,7 +97,7 @@ If used, the configuration file _**must**_ be named `config.yaml` and _**must**_
 #### Example configuration file:
 ```yaml
 # Name of the log file
-LogFile: "./bootlogger.log"
+LogFile: "D:\Logs\bootlogger.test.log"
 
 # Minimum width of the computer name field in the log
 NameWidth: 12
@@ -137,19 +137,19 @@ Note that shorthand flags must be **lower case**.
 
 #### Command-line examples:
 ```powershell
-bootlog.exe --timeformat 12hour
+bootlogger.exe --timeformat 12hour
 Desktop-Computer was rebooted on 2025-06-19  7:43:19 AM [Windows 11 Pro build 26100.4061]
 
-bootlog.exe -t=24h
+bootlogger.exe -t=24h
 Desktop-Computer was rebooted on 2025-06-19 07:43:19 [Windows 11 Pro build 26100.4061]
 
-bootlog.exe --timeformat RFC822 --no-buildinfo
+bootlogger.exe --timeformat RFC822 --no-buildinfo
 Desktop-Computer was rebooted on 19 Jun 25 07:43 CDT
 
-bootlog.exe --no-text
+bootlogger.exe --no-text
 Desktop-Computer 2025-06-19  7:43:19 AM [Windows 11 Pro build 26100.4061]
 
-bootlog.exe --logfile d:\logs\bootlog.txt -q
+bootlogger.exe --logfile d:\logs\bootlog.txt -q
 #The entry will be made in the log file but nothing will be written to the console.
 
 bootlogger.exe --dryrun
