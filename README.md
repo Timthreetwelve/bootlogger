@@ -58,7 +58,7 @@ or check its current status. When enabled, bootlogger will be added to the Windo
 Use `bootlogger.exe [command] --help` for more information about any of these commands.
 
 #### Example command output:
-```cmd
+```shell
 bootlogger.exe printconfig
 bootlogger configuration:
   logfile         = D:\Logs\bootlogger.test.log
@@ -110,7 +110,7 @@ TimeFormat: 24Hour
 All environment variables _**must**_ be prefixed with `BOOTLOG_` followed by the configuration option. _That's a single underscore character between BOOTLOG and the option._
 
 #### Example environment variables:
-```bat
+```shell
 setx BOOTLOG_TIMEFORMAT 12Hour
 
 setx BOOTLOG_No-Buildinfo true
@@ -136,7 +136,7 @@ Note that `--dryrun, --no-text` and `--no-buildinfo` do not have shorthand flags
 Note that shorthand flags must be **lower case**.
 
 #### Command-line examples:
-```powershell
+```shell
 bootlogger.exe --timeformat 12hour
 Desktop-Computer was rebooted on 2025-06-19  7:43:19 AM [Windows 11 Pro build 26100.4061]
 
