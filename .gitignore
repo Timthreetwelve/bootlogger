@@ -16,6 +16,7 @@
 
 # Log files
 *.log
+*.txt
 
 # Configuration files
 config.json
