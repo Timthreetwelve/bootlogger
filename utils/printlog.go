@@ -61,9 +61,16 @@ func PrintLog() error {
 	defer file.Close()
 
 	// Using bufio scanner here for memory-efficient line-by-line reading.
+	lineCounter := 0
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		fmt.Println(scanner.Text())
+		lineCounter++
+	}
+
+	// Print totals if flag is set
+	if viper.GetBool("totals") {
+		fmt.Printf("\n%s is %s and contains %d records.", logFile, formatFileSize(stat.Size()), lineCounter)
 	}
 
 	// Check for errors during scanning
@@ -72,4 +79,27 @@ func PrintLog() error {
 		return fmt.Errorf("Error reading the log file: %w", err)
 	}
 	return nil
+}
+
+// Formats a size given in bytes to kb, mb, etc.
+func formatFileSize(size int64) string {
+	const (
+		KB = 1024
+		MB = KB * 1024
+		GB = MB * 1024
+		TB = GB * 1024
+	)
+
+	switch {
+	case size >= TB:
+		return fmt.Sprintf("%.2f TB", float64(size)/float64(TB))
+	case size >= GB:
+		return fmt.Sprintf("%.2f GB", float64(size)/float64(GB))
+	case size >= MB:
+		return fmt.Sprintf("%.2f MB", float64(size)/float64(MB))
+	case size >= KB:
+		return fmt.Sprintf("%.2f KB", float64(size)/float64(KB))
+	default:
+		return fmt.Sprintf("%d bytes", size)
+	}
 }

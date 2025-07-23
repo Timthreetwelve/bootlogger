@@ -22,8 +22,11 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"log"
+
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/timthreetwelve/bootlogger/utils"
 )
 
@@ -44,7 +47,12 @@ var printlogCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(printlogCmd)
-	// No flags are needed for this command, it just prints the log file
 	// Output may be large, but can be piped through 'more'
+	rootCmd.AddCommand(printlogCmd)
+
+	// Boolean flag to print totals after the log entries
+	printlogCmd.Flags().BoolP("totals", "t", false, "Show log file size and total lines after printing log")
+	if err := viper.BindPFlag("totals", printlogCmd.Flags().Lookup("totals")); err != nil {
+		log.Printf("Error binding flag 'totals': %v", err)
+	}
 }
