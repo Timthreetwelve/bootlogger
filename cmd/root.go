@@ -47,9 +47,12 @@ const (
 	envPrefix          = "BOOTLOG"
 )
 
-// Version is set during the build process using the -ldflags option.
+// Ver (version) is set during the build process using the -ldflags option.
 // If not set, it defaults to "unknown".
 var Ver string = "unknown"
+
+// Date of build for use with the version command
+var BuildDate string = "unknown"
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{

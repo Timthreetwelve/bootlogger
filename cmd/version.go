@@ -34,13 +34,16 @@ var versionCmd = &cobra.Command{
 	Short:   "Print the bootlogger version number to the console.",
 	Example: "  bootlogger version\n  bootlogger ver",
 	Run: func(cmd *cobra.Command, args []string) {
-		color.New(color.FgHiWhite).Printf("bootlogger version:")
+		color.New(color.FgHiWhite).Printf("version:")
 		if Ver == "unknown" {
 			color.New(color.FgHiRed).Printf(" Version was not set during build.\n")
-		} else {
-			color.New(color.FgHiGreen).Printf(" %s\n", Ver)
+			return
 		}
-
+		color.New(color.FgHiGreen).Printf(" %s\n", Ver)
+		if BuildDate != "unknown" {
+			color.New(color.FgHiWhite).Printf("build date:")
+			color.New(color.FgHiGreen).Printf(" %s\n", BuildDate)
+		}
 	},
 }
 
