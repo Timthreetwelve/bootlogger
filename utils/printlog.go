@@ -60,17 +60,31 @@ func PrintLog() error {
 	}
 	defer file.Close()
 
-	// Using bufio scanner here for memory-efficient line-by-line reading.
 	lineCounter := 0
 	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		fmt.Println(scanner.Text())
-		lineCounter++
+	getLast := viper.GetInt("last")
+
+	if getLast > 0 {
+		lastLines, _ := ReadLastLines(logFile, getLast)
+		for _, line := range lastLines {
+			fmt.Println(line)
+			lineCounter++
+		}
+	} else {
+		// Using bufio scanner here for memory-efficient line-by-line reading.
+		for scanner.Scan() {
+			fmt.Println(scanner.Text())
+			lineCounter++
+		}
 	}
 
 	// Print totals if flag is set
 	if viper.GetBool("totals") {
-		fmt.Printf("\n%s is %s and contains %d records.", logFile, formatFileSize(stat.Size()), lineCounter)
+		if lineCounter == 1 {
+			fmt.Printf("\n%s is %s.  %d record was printed.\n", logFile, formatFileSize(stat.Size()), lineCounter)
+		} else {
+			fmt.Printf("\n%s is %s.  %d records were printed.\n", logFile, formatFileSize(stat.Size()), lineCounter)
+		}
 	}
 
 	// Check for errors during scanning

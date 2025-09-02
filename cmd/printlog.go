@@ -55,4 +55,9 @@ func init() {
 	if err := viper.BindPFlag("totals", printlogCmd.Flags().Lookup("totals")); err != nil {
 		log.Printf("Error binding flag 'totals': %v", err)
 	}
+
+	printlogCmd.Flags().Int16P("last", "l", 0, "Prints only the last n lines of the log file.")
+	if err := viper.BindPFlag("last", printlogCmd.Flags().Lookup("last")); err != nil {
+		log.Printf("Error binding flag 'last': %v", err)
+	}
 }
